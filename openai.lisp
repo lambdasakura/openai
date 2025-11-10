@@ -132,25 +132,6 @@
 
 ;;; Sample registrations for functions used in tool calling
 
-(defun get_weather (location)
-  (if (equal location "New York")
-      77.0
-      65.0))
-
-(register-function
- "get_weather"
- "Get current weather for a location"
- (list (cons :type "object")
-       (cons :properties (list (cons :location (list (cons :type "string")
-                                                     (cons :description "The city name")))))
-       (cons :required '("location")))
- #'openai::get_weather)
-
-
-(openai::completions "Use function calling for: What's the weather like in New York?" 1000 '("get_weather"))
-;(terpri) (terpri) (terpri) (terpri) (terpri) 
-;(completions "The President went to Congress" 20)
-
 #|
 ;; Example calls:
 
@@ -161,4 +142,3 @@
 (print (answer-question "Mary is 30 years old and Bob is 25. Who is older?" 60))
 (print (completions "Use function calling for: What's the weather like in New York?" 100 '("get_weather" "calculate")))
 |#
-
